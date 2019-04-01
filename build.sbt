@@ -58,11 +58,19 @@ resolvers ++= Seq(
   "maven" at "https://maven-central.storage-download.googleapis.com/repos/central/data/"
 )
 
+mainClass in (Compile, packageBin) := Some("me.rotemfo.sse.AkkaSSEServer")
+
 libraryDependencies ++= {
   sys.props += "packaging.type" -> "jar"
+  val akkaVersion = "2.5.21"
+  val akkaHttpVersion = "10.1.8"
   Seq(
-    "com.typesafe.akka" %% "akka-stream"       % "2.5.21",
-    "com.typesafe.akka" %% "akka-http"         % "10.1.8",
-    "com.typesafe.akka" %% "akka-http-testkit" % "10.1.8" % Test
+    "org.slf4j"          % "slf4j-api"         % "1.7.25",
+    "ch.qos.logback"     % "logback-classic"   % "1.2.3",
+    "org.json4s"        %% "json4s-native"     % "3.6.5",
+    "com.typesafe.akka" %% "akka-slf4j"        % akkaVersion,
+    "com.typesafe.akka" %% "akka-stream"       % akkaVersion,
+    "com.typesafe.akka" %% "akka-http"         % akkaHttpVersion,
+    "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test
   )
 }

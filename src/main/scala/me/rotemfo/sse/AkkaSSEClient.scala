@@ -7,7 +7,7 @@ import akka.http.scaladsl.model.{HttpMethods, HttpRequest}
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.scaladsl.Source
 
-object SSEClient extends SSEApp {
+object AkkaSSEClient extends AkkaSystem {
 
   private def Get(url: String): HttpRequest = {
     HttpRequest(HttpMethods.GET, url)
@@ -17,8 +17,10 @@ object SSEClient extends SSEApp {
 
   def main(args: Array[String]): Unit = {
     Http()
-      .singleRequest(Get("http://localhost:8000/events"))
+      .singleRequest(Get("http://localhost:8000/users"))
       .flatMap(Unmarshal(_).to[Source[ServerSentEvent, NotUsed]])
-      .foreach(_.runForeach(println))
+      .foreach(e => e.runForeach(se => {
+        println(User(se.data))
+      }))
   }
 }

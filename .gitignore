@@ -13,12 +13,56 @@ buildNumber.properties
 project/project
 project/target
 
+# IDE - VSCode
+/client/.vscode/*
+!/client/.vscode/settings.json
+!/client/.vscode/tasks.json
+!/client/.vscode/launch.json
+!/client/.vscode/extensions.json
+/client/.history/*
+
+# compiled output
+/client/dist
+/client/tmp
+/client/out-tsc
+# Only exists if Bazel was run
+/client/bazel-out
+
+# dependencies
+/client/node_modules
+
+# profiling files
+/client/chrome-profiler-events.json
+/client/speed-measure-plugin.json
+
+# See http:/help.github.com/ignore-files/ for more about ignoring files.
+/client/# misc
+/client/.sass-cache
+/client/connect.lock
+/client/coverage
+/client/libpeerconnection.log
+/client/npm-debug.log
+/client/yarn-error.log
+/client/testem.log
+/client/typings
+
+# System Files
+/client/.DS_Store
+/client/Thumbs.db
+
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 .idea/
 *.iml
 *.ipr
 *.iws
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
 
 ### Linux template
 *~
