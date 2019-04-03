@@ -61,16 +61,14 @@ resolvers ++= Seq(
 mainClass in (Compile, packageBin) := Some("me.rotemfo.sse.AkkaSSEServer")
 
 libraryDependencies ++= {
-  sys.props += "packaging.type" -> "jar"
-  val akkaVersion = "2.5.21"
-  val akkaHttpVersion = "10.1.8"
+  lazy val akkaVersion     = "2.5.21"
+  lazy val akkaHttpVersion = "10.1.8"
   Seq(
     "org.slf4j"          % "slf4j-api"         % "1.7.25",
     "ch.qos.logback"     % "logback-classic"   % "1.2.3",
     "org.json4s"        %% "json4s-native"     % "3.6.5",
     "com.typesafe.akka" %% "akka-slf4j"        % akkaVersion,
     "com.typesafe.akka" %% "akka-stream"       % akkaVersion,
-    "com.typesafe.akka" %% "akka-http"         % akkaHttpVersion,
-    "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test
+    "com.typesafe.akka" %% "akka-http"         % akkaHttpVersion
   )
 }

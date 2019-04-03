@@ -3,15 +3,17 @@ package me.rotemfo.sse
 import java.util.UUID
 
 import akka.NotUsed
+import akka.http.scaladsl.model.HttpMethods._
+import akka.http.scaladsl.model.headers._
 import akka.http.scaladsl.model.sse.ServerSentEvent
 import akka.http.scaladsl.server.{HttpApp, Route}
 import akka.stream.scaladsl.Source
-import akka.http.scaladsl.model.headers._
-import akka.http.scaladsl.model.HttpMethods._
+import org.slf4j.{Logger, LoggerFactory}
 
 import scala.concurrent.duration._
 
 object AkkaSSEServer extends HttpApp with AkkaSystem {
+  private final val logger: Logger = LoggerFactory.getLogger(getClass)
 
   private final val headers =
     `Access-Control-Allow-Origin`.* ::
@@ -31,6 +33,7 @@ object AkkaSSEServer extends HttpApp with AkkaSystem {
               .map(_ => {
                 val uuid = UUID.randomUUID().toString
                 val user = User(uuid.hashCode, uuid).toString
+                logger.info("sending user: {}", user)
                 ServerSentEvent(user)
               })
               .keepAlive(1.second, () => ServerSentEvent.heartbeat)
