@@ -1,5 +1,7 @@
 package me.rotemfo.sse
 
+import java.util.UUID
+
 import org.json4s.{Extraction, Formats, NoTypeHints, StringInput}
 import org.json4s.native.Serialization
 import org.json4s.native.JsonMethods._
@@ -18,4 +20,8 @@ object User {
   def apply(s: String): User = {
     parse(StringInput(s)).extract[User]
   }
+  def apply(uuid: UUID): User = {
+    User(uuid.toString.hashCode, uuid.toString)
+  }
+  def apply(): User = this(UUID.randomUUID())
 }

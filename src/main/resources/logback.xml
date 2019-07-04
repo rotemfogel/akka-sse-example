@@ -5,7 +5,7 @@
         </encoder>
     </appender>
 
-    <logger name="akka" level="INFO"/>
+    <logger name="akka" level="DEBUG"/>
     <logger name="me.rotemfo" level="DEBUG"/>
 
     <root level="INFO">
